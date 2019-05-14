@@ -1,4 +1,4 @@
-package org.answer.common.util.excel.entity;
+package org.answer.common.util.easyexcel.balance;
 
 
 import lombok.AllArgsConstructor;
