@@ -1,11 +1,12 @@
-package org.answer.common.util.number;
+package org.answer.common.util;
 
 import java.io.UnsupportedEncodingException;
 
 /**
  * 字符工具类
  *
- * @author .
+ * @author Answer.AI.L
+ * @date 2019-03-07
  */
 public class NumberStringUtil {
 

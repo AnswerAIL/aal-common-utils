@@ -1,4 +1,4 @@
-package org.answer.common.util.number;
+package org.answer.common.util;
 
 import org.answer.common.util.exception.AALException;
 
