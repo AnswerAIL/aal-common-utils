@@ -15,7 +15,7 @@ import java.util.List;
 public class AnalysisParser<T extends AnalysisParser> extends AnalysisEventListener {
 
     // excel 数据集
-    List<List<String>> datas;
+    protected List<List<String>> datas;
 
     public AnalysisParser() {
         this.datas = new ArrayList<>();
@@ -37,7 +37,7 @@ public class AnalysisParser<T extends AnalysisParser> extends AnalysisEventListe
     }
 
 
-    List<List<String>> getDatas() {
+    protected List<List<String>> getDatas() {
         return datas;
     }
 }
