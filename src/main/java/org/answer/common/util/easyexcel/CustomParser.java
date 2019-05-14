@@ -2,7 +2,6 @@ package org.answer.common.util.easyexcel;
 
 import com.alibaba.excel.context.AnalysisContext;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,14 +19,6 @@ public class CustomParser extends AnalysisParser<AnalysisParser> {
         if (context.getCurrentRowNum() > 0) {
             datas.add((List<String>) object);
         }
-    }
-
-    /**
-     * 清理后续工作. 如: 对象的回收工作
-     * */
-    @Override
-    public void doAfterAllAnalysed(AnalysisContext context) {
-
     }
 
 }
