@@ -1,6 +1,6 @@
 package org.answer.common.util.iso8583;
 
-import org.answer.common.util.exception.AIException;
+import org.answer.common.util.exception.AALException;
 import org.answer.common.util.number.NumberStringUtil;
 import org.apache.commons.lang3.StringUtils;
 
@@ -239,7 +239,7 @@ public class TransISO8583MessageUtil {
                         NumberStringUtil.addLeftZero(Integer.toHexString(fixLength), fldLenSizeTmp));
             } else {
                 // 没有域长度编码规则信息抛异常
-                throw new AIException("[AI]Error of lenEncodeRule.");
+                throw new AALException("[AI]Error of lenEncodeRule.");
             }
             // 根据域编码规则,把数据转换
             fldValueBytes = fieldEncodeRule(fldValue, CHARSET, encodeRule);
@@ -247,7 +247,7 @@ public class TransISO8583MessageUtil {
         } else if (FLD_LENGTH_FLAG_0.equals(fldFlag)) {
             // TODO Answer 暂不做处理
         } else {
-            throw new AIException("[AI]Error of fldFlag.");
+            throw new AALException("[AI]Error of fldFlag.");
         }
         return NumberStringUtil.bytesToHexString(fldValueBytes);
     }
@@ -344,7 +344,7 @@ public class TransISO8583MessageUtil {
             } else if (FLD_LENGTH_FLAG_0.equals(fldFlag)) {
                 // TODO Answer 暂不做处理
             } else {
-                throw new AIException("[AI]Error of fldFlag.");
+                throw new AALException("[AI]Error of fldFlag.");
             }
 
         }
@@ -412,7 +412,7 @@ public class TransISO8583MessageUtil {
             fieldLength = Integer.parseInt(NumberStringUtil.byteToBinary(fldLenByte), 10);
         } else {
             // 没有域长度编码规则信息 抛异常
-            throw new AIException("[AI]Error of fieldLenDecodeRule.");
+            throw new AALException("[AI]Error of fieldLenDecodeRule.");
         }
         return fieldLength;
     }

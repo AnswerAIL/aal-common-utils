@@ -3,13 +3,13 @@ package org.answer.common.util.exception;
 /**
  * Created by Answer.AI.L on 2019-03-07 09:46
  */
-public class AIException extends RuntimeException {
+public class AALException extends RuntimeException {
 
-    public AIException() {
+    public AALException() {
         super();
     }
 
-    public AIException(String msg) {
+    public AALException(String msg) {
         super(msg);
     }
 
