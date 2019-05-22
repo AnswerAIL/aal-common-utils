@@ -28,31 +28,15 @@ public class Utils {
     }
 
 
-    public static String toJsonFormat(Class<?> clazz) {
-        return toJsonFormat(clazz, 0);
-    }
-
     /**
      * @param clazz 类
-     * @param listLength 对于字段是 {@link List} 类型的, 进行占位符预设时 list 的大小
      * */
-    public static String toJsonFormat(Class<?> clazz, int listLength) {
+    public static String toJsonFormat(Class<?> clazz) {
         StringBuilder json = new StringBuilder("{");
         Field[] fields = superDeclaredField(clazz);
         for (Field field : fields) {
             String name = field.getName();
-            if (List.class.getName().equals(field.getGenericType().getTypeName())) {
-                json.append("\"").append(name).append("\": [");
-                for (int i = 0; i < listLength; i++) {
-                    json.append("\"%s\",");
-                }
-                json.deleteCharAt(json.length() - 1);
-                json.append("],");
-            } else {
-                json.append("\"").append(name).append("\": \"%s\",");
-            }
-
-
+            json.append("\"").append(name).append("\": \"%s\",");
         }
         json.deleteCharAt(json.length() - 1);
         json.append("}");
