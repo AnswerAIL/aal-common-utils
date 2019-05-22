@@ -23,7 +23,7 @@ public class AnalysisParser<T> extends AnalysisEventListener {
     private Class<T> clazz;
 
     /** excel 数据集 */
-    private List<T> datas;
+    protected List<T> datas;
 
     public AnalysisParser(Class<T> clazz) {
         this.clazz = clazz;
@@ -35,12 +35,8 @@ public class AnalysisParser<T> extends AnalysisEventListener {
      * */
     @Override
     public void invoke(Object object, AnalysisContext context) {
-        ArrayList row = (ArrayList) object;
-        Object[] array = row.toArray();
-
-        String json = String.format(toJsonFormat(clazz), array);
-        T t = JSON.parseObject(json, clazz);
-        datas.add(t);
+        T t = handler(object, context);
+        this.datas.add(t);
     }
 
     /**
@@ -55,5 +51,14 @@ public class AnalysisParser<T> extends AnalysisEventListener {
      * */
     public List<T> getDatas() {
         return datas;
+    }
+
+
+    protected T handler(Object object, AnalysisContext context) {
+        ArrayList row = (ArrayList) object;
+        Object[] array = row.toArray();
+
+        String json = String.format(toJsonFormat(clazz), array);
+        return JSON.parseObject(json, clazz);
     }
 }
