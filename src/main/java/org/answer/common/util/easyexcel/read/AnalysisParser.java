@@ -54,6 +54,9 @@ public class AnalysisParser<T> extends AnalysisEventListener {
     }
 
 
+    /**
+     * 转换 excel 中的行数据为 T 对象
+     * */
     protected T handler(Object object, AnalysisContext context) {
         ArrayList row = (ArrayList) object;
         Object[] array = row.toArray();
