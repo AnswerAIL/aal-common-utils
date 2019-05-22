@@ -23,7 +23,7 @@ public class AnalysisParser<T> extends AnalysisEventListener {
     private Class<T> clazz;
 
     /** excel 数据集 */
-    protected List<T> datas;
+    private List<T> datas;
 
     public AnalysisParser(Class<T> clazz) {
         this.clazz = clazz;
