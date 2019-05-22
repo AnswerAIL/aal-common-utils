@@ -1,7 +1,7 @@
 package org.answer.common.util.excel;
 
 import com.alibaba.fastjson.JSON;
-import org.answer.common.util.easyexcel.ExcelUtils;
+import org.answer.common.util.easyexcel.read.ExcelUtils;
 import org.answer.common.util.easyexcel.read.AnalysisParser;
 
 import java.io.File;
