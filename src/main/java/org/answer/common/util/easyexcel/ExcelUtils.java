@@ -2,6 +2,7 @@ package org.answer.common.util.easyexcel;
 
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.support.ExcelTypeEnum;
+import org.answer.common.util.easyexcel.read.AnalysisParser;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,27 +16,6 @@ import java.util.List;
  */
 public class ExcelUtils {
 
-    /**
-     * 读取 ***.xls 格式excel, 默认使用 {@link AnalysisParser} 解析器
-     * @param excelFile excel 文件
-     *
-     * @return 'List<List<String>>'
-     * */
-    public static List<List<String>> readXlsExcel(File excelFile) {
-        return readExcel(excelFile, ExcelTypeEnum.XLS, new AnalysisParser<>());
-    }
-
-    /**
-     * 读取 ***.xlsx 格式excel, 默认使用 {@link AnalysisParser} 解析器
-     *
-     * @param excelFile excel 文件
-     *
-     * @return 'List<List<String>>'
-     * */
-    public static List<List<String>> readXlsxExcel(File excelFile) {
-        return readExcel(excelFile, ExcelTypeEnum.XLSX, new AnalysisParser<>());
-    }
-
 
     /**
      * 读取 ***.xls 格式excel
@@ -44,7 +24,7 @@ public class ExcelUtils {
      *
      * @return 'List<List<String>>'
      * */
-    public static List<List<String>> readXlsExcel(File excelFile, AnalysisParser<? extends AnalysisParser> analysisParser) {
+    public static <T> List<T> readXlsExcel(File excelFile, AnalysisParser<T> analysisParser) {
         return readExcel(excelFile, ExcelTypeEnum.XLS, analysisParser);
     }
 
@@ -57,7 +37,7 @@ public class ExcelUtils {
      *
      * @return 'List<List<String>>'
      * */
-    public static List<List<String>> readXlsxExcel(File excelFile, AnalysisParser<? extends AnalysisParser> analysisParser) {
+    public static <T> List<T> readXlsxExcel(File excelFile, AnalysisParser<T> analysisParser) {
         return readExcel(excelFile, ExcelTypeEnum.XLSX, analysisParser);
     }
 
@@ -71,7 +51,7 @@ public class ExcelUtils {
      *
      * @return 'List<List<String>>'
      * */
-    public static List<List<String>> readExcel(File excelFile, ExcelTypeEnum excelTypeEnum, AnalysisParser<? extends AnalysisParser> analysisParser) {
+    public static <T> List<T> readExcel(File excelFile, ExcelTypeEnum excelTypeEnum, AnalysisParser<T> analysisParser) {
         InputStream inputStream = null;
         try {
             inputStream = new FileInputStream(excelFile);

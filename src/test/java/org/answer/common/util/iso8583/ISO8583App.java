@@ -1,4 +1,4 @@
-package org.answer.common.util;
+package org.answer.common.util.iso8583;
 
 import com.alibaba.fastjson.JSON;
 import org.answer.common.util.iso8583.AIISO8583DTO;
@@ -7,7 +7,7 @@ import org.answer.common.util.iso8583.TransISO8583MessageUtil;
 /**
  * Created by Answer.AI.L on 2019-03-07 10:15
  */
-public class ISO8583Test {
+public class ISO8583App {
 
     public static void main(String[] args) throws Exception {
         final String TPDU = "6000000000";
