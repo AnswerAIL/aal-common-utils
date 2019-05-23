@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class ExportInfo extends BaseRowModel {
+public class UserInfo extends BaseRowModel {
     @ExcelProperty(value = "姓名" ,index = 0)
     private String name;
 

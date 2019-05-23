@@ -30,13 +30,13 @@ public class WriteExcel extends ExcelWriter {
 
     public static void main(String[] args) throws IOException, CloneNotSupportedException {
 
-        List<ExportInfo> exportInfos = createData();
+        List<UserInfo> userInfos = createData();
 
-        OutputStream outputStream = new FileOutputStream(new File("C:/Users/answer/Desktop/财报系统/answer.xls"));
+        OutputStream outputStream = new FileOutputStream(new File("C:/Users/answer/Desktop/answer.xls"));
         WriteExcel writeExcel = new WriteExcel(outputStream, ExcelTypeEnum.XLS);
 
         /* sheet-1 */
-        Sheet sheet1 = new Sheet(1, 1, ExportInfo.class);
+        Sheet sheet1 = new Sheet(1, 1, UserInfo.class);
         sheet1.setSheetName("sheet-1");
         // 数据行从第几行开始
         sheet1.setStartRow(0);
@@ -50,7 +50,7 @@ public class WriteExcel extends ExcelWriter {
                 3,10000
         );
         sheet1.setColumnWidthMap(columnWidth);
-        writeExcel.write(exportInfos, sheet1);
+        writeExcel.write(userInfos, sheet1);
 
         /* sheet-2 */
         Sheet sheet2 = new Sheet(2);
@@ -60,14 +60,14 @@ public class WriteExcel extends ExcelWriter {
         /* sheet-2 table1 使用自定义头部 */
         Table table1 = new Table(1);
         table1.setHead(head());
-        table1.setClazz(ExportInfo.class);
-        writeExcel.write(exportInfos, sheet2, table1);
+        table1.setClazz(UserInfo.class);
+        writeExcel.write(userInfos, sheet2, table1);
 
         /* sheet-2 table2 使用注释头部 */
         Table table2 = new Table(2);
         table2.setTableStyle(createTableStyle());
-        table2.setClazz(ExportInfo.class);
-        writeExcel.write(exportInfos, sheet2, table2);
+        table2.setClazz(UserInfo.class);
+        writeExcel.write(userInfos, sheet2, table2);
 
         // 关闭资源
         writeExcel.finish();
@@ -76,19 +76,19 @@ public class WriteExcel extends ExcelWriter {
     }
 
 
-    private static List<ExportInfo> createData() {
-        List<ExportInfo> exportInfos = new ArrayList<>();
+    private static List<UserInfo> createData() {
+        List<UserInfo> userInfos = new ArrayList<>();
 
         for (int i = 0; i < 10; i++) {
-            exportInfos.add(
-                    new ExportInfo(
+            userInfos.add(
+                    new UserInfo(
                     "answer-" + i,
                             12 + i,
                             "pt",
                             "answer_ljm@163.com"));
         }
 
-        return exportInfos;
+        return userInfos;
     }
 
 
