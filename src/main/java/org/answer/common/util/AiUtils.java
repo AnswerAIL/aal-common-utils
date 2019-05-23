@@ -9,7 +9,7 @@ import java.util.List;
  * @author Answer.AI.L
  * @date 2019-05-17
  */
-public class Utils {
+public class AiUtils {
 
 
     /**

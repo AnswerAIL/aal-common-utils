@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSON;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.answer.common.util.Utils.toJsonFormat;
+import static org.answer.common.util.AiUtils.toJsonFormat;
 
 /**
  * 默认 excel 读取解析器
