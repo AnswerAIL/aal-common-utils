@@ -6,11 +6,12 @@ import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.metadata.Table;
 import com.alibaba.excel.metadata.TableStyle;
 import com.alibaba.excel.support.ExcelTypeEnum;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
 import org.apache.poi.ss.usermodel.IndexedColors;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,59 +22,52 @@ import java.util.Map;
  * <a>https://github.com/alibaba/easyexcel/blob/master/src/test/java/com/alibaba/easyexcel/test/util/DataUtil.java</a>
  */
 public class WriteExcel extends ExcelWriter {
-//    private OutputStream outputStream;
 
     public WriteExcel(OutputStream outputStream, ExcelTypeEnum typeEnum) {
         super(outputStream, typeEnum);
-//        this.outputStream = outputStream;
     }
 
 
     public static void main(String[] args) throws IOException, CloneNotSupportedException {
 
-        List<ExportInfo> exportInfos = new ArrayList<>();
-        ExportInfo  exportInfo = new ExportInfo();
-        exportInfo.setName("answer");
-        exportInfo.setAge(12);
-        exportInfo.setAddress("pt");
-        exportInfo.setEmail("answer_ljm@163.com");
-        exportInfos.add(exportInfo);
-
-        exportInfo = new ExportInfo();
-        exportInfo.setName("answer1");
-        exportInfo.setAge(21);
-        exportInfo.setAddress("sz");
-        exportInfo.setEmail("answer_ljm@163.com");
-        exportInfos.add(exportInfo);
+        List<ExportInfo> exportInfos = createData();
 
         OutputStream outputStream = new FileOutputStream(new File("C:/Users/answer/Desktop/财报系统/answer.xls"));
         WriteExcel writeExcel = new WriteExcel(outputStream, ExcelTypeEnum.XLS);
-        // headLineMun: 表头占几行, 好像不起作用
-        Sheet sheet = new Sheet(1, 3, ExportInfo.class);
-        sheet.setSheetName("answer");
-        sheet.setStartRow(3);
+
+        /* sheet-1 */
+        Sheet sheet1 = new Sheet(1, 1, ExportInfo.class);
+        sheet1.setSheetName("sheet-1");
+        // 数据行从第几行开始
+        sheet1.setStartRow(0);
         // 设置自适应
 //        sheet.setAutoWidth(Boolean.TRUE);
         //设置列宽 设置每列的宽度
-        Map<Integer, Integer> columnWidth = new HashMap<>();
-        columnWidth.put(0,10000);columnWidth.put(1,10000);columnWidth.put(2,10000);columnWidth.put(3,10000);
-        sheet.setColumnWidthMap(columnWidth);
-        writeExcel.write(exportInfos, sheet);
+        Map<Integer, Integer> columnWidth = ImmutableMap.of(
+                0,10000,
+                1,10000,
+                2,10000,
+                3,10000
+        );
+        sheet1.setColumnWidthMap(columnWidth);
+        writeExcel.write(exportInfos, sheet1);
 
-        Sheet sheet1 = new Sheet(2, 3, ExportInfo.class);
-        sheet1.setSheetName("aal");
+        /* sheet-2 */
+        Sheet sheet2 = new Sheet(2);
+        sheet2.setSheetName("sheet-2");
+
+
+        /* sheet-2 table1 使用自定义头部 */
         Table table1 = new Table(1);
         table1.setHead(head());
-        writeExcel.write(exportInfos, sheet1, table1);
+        table1.setClazz(ExportInfo.class);
+        writeExcel.write(exportInfos, sheet2, table1);
 
-        //写sheet2  模型上打有表头的注解
+        /* sheet-2 table2 使用注释头部 */
         Table table2 = new Table(2);
         table2.setTableStyle(createTableStyle());
         table2.setClazz(ExportInfo.class);
-        writeExcel.write(exportInfos, sheet1, table2);
-
-
-
+        writeExcel.write(exportInfos, sheet2, table2);
 
         // 关闭资源
         writeExcel.finish();
@@ -81,7 +75,24 @@ public class WriteExcel extends ExcelWriter {
 
     }
 
-    public static TableStyle createTableStyle() {
+
+    private static List<ExportInfo> createData() {
+        List<ExportInfo> exportInfos = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+            exportInfos.add(
+                    new ExportInfo(
+                    "answer-" + i,
+                            12 + i,
+                            "pt",
+                            "answer_ljm@163.com"));
+        }
+
+        return exportInfos;
+    }
+
+
+    private static TableStyle createTableStyle() {
         TableStyle tableStyle = new TableStyle();
         Font headFont = new Font();
         headFont.setBold(true);
@@ -103,32 +114,17 @@ public class WriteExcel extends ExcelWriter {
         return tableStyle;
     }
 
-    public static List<List<String>> head() {
+    private static List<List<String>> head() {
         List<List<String>> lists = new ArrayList<>();
 
-        for (int i = 0; i < 2; i++) {
-            List<String> list = new ArrayList<>();
-            list.add("姓名" + i);
-            list.add("年龄" + i);
-            list.add("地址" + i);
-            list.add("邮箱" + i);
-            lists.add(list);
-
-        }
-
+        lists.add(Lists.newArrayList("姓名"));
+        lists.add(Lists.newArrayList("年龄"));
+        lists.add(Lists.newArrayList("邮箱"));
+        lists.add(Lists.newArrayList("地址"));
 
         return lists;
     }
 
-//    @Override
-//    public void finish() {
-//        super.finish();
-//        try {
-//            outputStream.flush();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }
 
 

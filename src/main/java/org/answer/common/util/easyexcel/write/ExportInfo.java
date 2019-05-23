@@ -2,11 +2,17 @@ package org.answer.common.util.easyexcel.write;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.metadata.BaseRowModel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author Answer.AI.L
  * @date 2019-05-14
  */
+@Data
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 public class ExportInfo extends BaseRowModel {
     @ExcelProperty(value = "姓名" ,index = 0)
     private String name;
@@ -20,35 +26,4 @@ public class ExportInfo extends BaseRowModel {
     @ExcelProperty(value = "地址",index = 3)
     private String address;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 }
