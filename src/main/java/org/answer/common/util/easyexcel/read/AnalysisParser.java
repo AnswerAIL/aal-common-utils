@@ -14,6 +14,8 @@ import static org.answer.common.util.AiUtils.toJsonFormat;
  *
  * @author Answer.AI.L
  * @date 2019-05-14
+ *
+ * 目前只支持 类 T 中的变量类型都为 String 的解析
  */
 public class AnalysisParser<T> extends AnalysisEventListener {
 
