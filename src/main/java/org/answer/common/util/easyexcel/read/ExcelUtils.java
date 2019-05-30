@@ -1,8 +1,14 @@
+/*
+ * Copyright(c) 2015-2019, Answer.AI.L
+ * ShenZhen AAL Technology Co., Ltd.
+ * All rights reserved.
+ *
+ * https://github.com/AnswerAIL/
+ */
 package org.answer.common.util.easyexcel.read;
 
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.support.ExcelTypeEnum;
-import org.answer.common.util.easyexcel.read.AnalysisParser;
 
 import java.io.File;
 import java.io.FileInputStream;

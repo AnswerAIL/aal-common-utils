@@ -1,3 +1,10 @@
+/*
+ * Copyright(c) 2015-2019, Answer.AI.L
+ * ShenZhen AAL Technology Co., Ltd.
+ * All rights reserved.
+ *
+ * https://github.com/AnswerAIL/
+ */
 package org.answer.common.util.iso8583;
 
 import org.answer.common.util.exception.AALException;
@@ -10,7 +17,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ISO8583报文组/解包工具类
+ * <p>
+ *     ISO8583报文组/解包工具类
+ * </p>
+ *
  * Created by Answer on 2017-12-21 09:23
  */
 public class TransISO8583MessageUtil {

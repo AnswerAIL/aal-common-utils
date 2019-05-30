@@ -1,9 +1,18 @@
+/*
+ * Copyright(c) 2015-2019, Answer.AI.L
+ * ShenZhen AAL Technology Co., Ltd.
+ * All rights reserved.
+ *
+ * https://github.com/AnswerAIL/
+ */
 package org.answer.common.util;
 
 import org.answer.common.util.exception.AALException;
 
 /**
- * 转换工具类
+ * <p>
+ *     转换工具类
+ * </p>
  *
  * @author Answer.AI.L
  * @date 2019-05-14

@@ -1,9 +1,17 @@
+/*
+ * Copyright(c) 2015-2019, Answer.AI.L
+ * ShenZhen AAL Technology Co., Ltd.
+ * All rights reserved.
+ *
+ * https://github.com/AnswerAIL/
+ */
 package org.answer.common.util.iso8583;
 
-
-
 /**
- * 报文交互DTO
+ * <p>
+ *     报文交互DTO
+ * </p>
+ *
  * Created by Answer on 2017-12-23 10:01
  */
 public class AIISO8583DTO {

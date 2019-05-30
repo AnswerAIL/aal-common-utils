@@ -1,3 +1,10 @@
+/*
+ * Copyright(c) 2015-2019, Answer.AI.L
+ * ShenZhen AAL Technology Co., Ltd.
+ * All rights reserved.
+ *
+ * https://github.com/AnswerAIL/
+ */
 package org.answer.common.util.easyexcel.write;
 
 import com.alibaba.excel.ExcelWriter;

@@ -1,3 +1,10 @@
+/*
+ * Copyright(c) 2015-2019, Answer.AI.L
+ * ShenZhen AAL Technology Co., Ltd.
+ * All rights reserved.
+ *
+ * https://github.com/AnswerAIL/
+ */
 package org.answer.common.util.easyexcel.read;
 
 import com.alibaba.excel.context.AnalysisContext;
@@ -10,12 +17,16 @@ import java.util.List;
 import static org.answer.common.util.AiUtils.toJsonFormat;
 
 /**
- * 默认 excel 读取解析器
+ * <p>
+ *     默认 excel 读取解析器
+ *
+ *     <blockquote>
+ *         目前只支持 类 T 中的变量类型都为 String 的解析
+ *     </blockquote>
+ * </p>
  *
  * @author Answer.AI.L
  * @date 2019-05-14
- *
- * 目前只支持 类 T 中的变量类型都为 String 的解析
  */
 public class AnalysisParser<T> extends AnalysisEventListener {
 

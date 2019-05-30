@@ -1,9 +1,19 @@
+/*
+ * Copyright(c) 2015-2019, Answer.AI.L
+ * ShenZhen AAL Technology Co., Ltd.
+ * All rights reserved.
+ *
+ * https://github.com/AnswerAIL/
+ */
 package org.answer.common.util.iso8583;
 
 import java.lang.annotation.*;
 
 /**
- * ISO8583字段域注解类
+ * <p>
+ *     ISO8583字段域注解类
+ * </p>
+ *
  * Created by Answer on 2017-12-21 09:45
  */
 @Target({ElementType.FIELD, ElementType.ANNOTATION_TYPE})
