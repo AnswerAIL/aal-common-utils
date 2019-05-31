@@ -18,8 +18,8 @@ public class EasyExcelApp {
     public static void main(String[] args) throws FileNotFoundException {
         List<User> datas = ExcelUtils.readXlsExcel(new File("src/test/resources/users.xls"), new UserAnalysisParser(User.class));
 
-        for (User data: datas) {
-            System.out.println(JSON.toJSONString(data));
+        for (User user: datas) {
+            System.out.println(JSON.toJSONString(user));
         }
 
         System.out.println();
