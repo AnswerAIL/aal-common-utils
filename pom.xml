@@ -14,6 +14,7 @@
         <easyExcelVersion>1.1.1</easyExcelVersion>
         <lombokVersion>1.18.6</lombokVersion>
         <guavaVersion>27.0.1-jre</guavaVersion>
+        <jacksonVersion>2.9.8</jacksonVersion>
     </properties>
 
     <dependencies>
@@ -46,6 +47,12 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${guavaVersion}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jacksonVersion}</version>
         </dependency>
 
     </dependencies>
