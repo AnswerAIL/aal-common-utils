@@ -7,12 +7,14 @@
  */
 package org.answer.common.util.jackjson;
 
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,20 +29,52 @@ import java.util.Map;
  * @date 2019-8-17
  *
  * http://tutorials.jenkov.com/java-json/jackson-objectmapper.html
+ *
+ * Jackson 配置官方文档: https://github.com/FasterXML/jackson-databind/wiki/JacksonFeatures
  * */
 public class JacksonUtil {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
+    /* Jackson 配置 */
     static {
-        OBJECT_MAPPER.configure(JsonParser.Feature.ALLOW_COMMENTS, true);
-
         OBJECT_MAPPER.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false);
-        OBJECT_MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         OBJECT_MAPPER.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, true);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         OBJECT_MAPPER.setDateFormat(dateFormat);
+
+
+        // 美化输出
+        OBJECT_MAPPER.enable(SerializationFeature.INDENT_OUTPUT);
+
+        // 允许序列化空的POJO类(否则会抛出异常)
+        OBJECT_MAPPER.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+
+        // 把 java.util.Date, Calendar 输出为数字（时间戳）
+        OBJECT_MAPPER.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
+        // 在遇到未知属性的时候不抛出异常
+        OBJECT_MAPPER.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+//        OBJECT_MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+        // 强制 JSON 空字符串("")转换为 null 对象值:
+        OBJECT_MAPPER.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+
+        // 在 JSON 中允许 C/C++ 样式的注释(非标准，默认禁用)
+        OBJECT_MAPPER.configure(JsonParser.Feature.ALLOW_COMMENTS, true);
+
+        // 允许没有引号的字段名(非标准)
+        OBJECT_MAPPER.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
+
+        // 允许单引号(非标准)
+        OBJECT_MAPPER.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
+
+        // 强制转义非 ASCII 字符
+        OBJECT_MAPPER.configure(JsonGenerator.Feature.ESCAPE_NON_ASCII, true);
+
+        // 将内容包裹为一个 JSON 属性, 属性名由 @JsonRootName 注解指定
+        OBJECT_MAPPER.configure(SerializationFeature.WRAP_ROOT_VALUE, true);
     }
 
 
