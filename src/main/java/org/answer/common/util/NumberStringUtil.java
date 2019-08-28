@@ -184,8 +184,8 @@ public class NumberStringUtil {
     /**
      * 字节数据相加
      *
-     * @param sByte .
-     * @param aByte .
+     * @param sByte 源字节数组
+     * @param aByte 待新增数组
      * @return byte[]
      */
     public static byte[] byteArrayAdd(byte[] sByte, byte[] aByte) {
@@ -215,7 +215,7 @@ public class NumberStringUtil {
 
     /**
      * 字节转换二进制
-     * @param byteArray .
+     * @param byteArray 字节数组
      * @return str
      */
     public static String byteToBinary(byte[] byteArray) {
