@@ -146,6 +146,12 @@ public class ZipUtils {
         parameters.setCompressionMethod(CompressionMethod.DEFLATE);
         parameters.setCompressionLevel(CompressionLevel.NORMAL);
 
+        // 如果压缩包目录不存在则新建
+        String zipParentPath = new File(zipFilePath).getParent();
+        if (!new File(zipParentPath).exists()) {
+            new File(zipParentPath).mkdirs();
+        }
+
         if (isEmpty(pwd)) {
             zipFile = new ZipFile(zipFilePath);
         } else {
@@ -244,6 +250,12 @@ public class ZipUtils {
             ZipFile zipFile;
             ZipParameters parameters = new ZipParameters();
             parameters.setCompressionMethod(CompressionMethod.DEFLATE);
+
+            // 如果压缩包目录不存在则新建
+            String zipParentPath = new File(zipFilePath).getParent();
+            if (!new File(zipParentPath).exists()) {
+                new File(zipParentPath).mkdirs();
+            }
 
             if (isEmpty(pwd)) {
                 zipFile = new ZipFile(zipFilePath);
