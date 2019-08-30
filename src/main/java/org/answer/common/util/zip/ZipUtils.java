@@ -54,15 +54,21 @@ public class ZipUtils {
     public static void zip(String zipFilePath, List<File> zipFiles, String pwd) throws ZipException {
         zipFiles.removeIf(file -> {
             boolean notExists = !file.exists();
-            if (notExists) {
+//            if (notExists) {
 //                log.warn("file=[{}] is not exists", file.getPath());
-            }
+//            }
             return notExists;
         });
 
         if (zipFiles.size() < 1) {
 //            log.warn("file size is zero");
             return;
+        }
+
+        // 如果压缩包目录不存在则新建
+        String zipParentPath = new File(zipFilePath).getParent();
+        if (!new File(zipParentPath).exists()) {
+            new File(zipParentPath).mkdirs();
         }
 
         ZipFile zipFile;
