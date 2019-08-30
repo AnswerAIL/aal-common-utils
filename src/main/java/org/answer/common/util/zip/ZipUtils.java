@@ -251,6 +251,7 @@ public class ZipUtils {
         try (InputStream is = new FileInputStream(file)) {
             ZipFile zipFile;
             ZipParameters parameters = new ZipParameters();
+            // 使用的压缩算法, DEFLATE 默认压缩算法, 如果不想使用任何压缩算法, 可用 CompressionMethod.STORE
             parameters.setCompressionMethod(CompressionMethod.DEFLATE);
 
             // 如果压缩包目录不存在则新建
