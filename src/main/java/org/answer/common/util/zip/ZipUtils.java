@@ -277,7 +277,7 @@ public class ZipUtils {
 
 
     /**
-     * 解压(不支持文件名称为中文)
+     * 解压(有些情况下不支持文件名称为中文)
      *
      * @param srcPath 待解压的 zip 文件路径
      * @param descPath 解压路径
@@ -288,7 +288,7 @@ public class ZipUtils {
     }
 
     /**
-     * 解压(不支持文件名称为中文)
+     * 解压(有些情况下不支持文件名称为中文)
      *
      * @param srcPath 待解压的 zip 文件路径
      * @param descPath 解压路径
@@ -300,7 +300,7 @@ public class ZipUtils {
     }
 
     /**
-     * 解压(不支持文件名称为中文)
+     * 解压(有些情况下不支持文件名称为中文)
      *
      * @param srcFile 待解压的 zip 文件
      * @param descPath 解压路径
@@ -311,7 +311,7 @@ public class ZipUtils {
     }
 
     /**
-     * 解压(不支持文件名称为中文)
+     * 解压(有些情况下不支持文件名称为中文)
      *
      * @param srcFile 待解压的 zip 文件
      * @param descPath 解压路径
@@ -410,14 +410,11 @@ public class ZipUtils {
 
         List<FileHeader> fileHeaders = zipFile.getFileHeaders();
         for (FileHeader fileHeader : fileHeaders) {
-            try {
-                // 解决中文文件名乱码问题
-                String fileName = new String(fileHeader.getFileName().getBytes("CP437"), "gbk");
+            String fileName = fileHeader.getFileName();
+            // 解决中文文件名乱码问题
+//            String fileName = new String(fileHeader.getFileName().getBytes("CP437"), "gbk");
 //                log.info("fileName=[{}]", fileName);
-                zipFile.extractFile(fileHeader, descPath, fileName);
-            } catch (UnsupportedEncodingException e1) {
-                e1.printStackTrace();
-            }
+            zipFile.extractFile(fileHeader, descPath, fileName);
         }
     }
 
@@ -440,20 +437,4 @@ public class ZipUtils {
         return (str == null || "".equals(str));
     }
 
-
-    public static void main(String[] args) throws Exception {
-        zipStream("C:\\Users\\answer\\Desktop\\zip\\ai.zip", "C:\\Users\\answer\\Desktop\\zip\\report\\balance\\123.xlsx");
-
-        /*List<File> files = Lists.newArrayList(new File("C:\\Users\\answer\\Desktop\\zip\\report"),
-                new File("C:\\Users\\answer\\Desktop\\zip\\report\\balance\\123.xlsx"),
-                new File("C:\\Users\\answer\\Desktop\\zip\\report\\balance\\456.xlsx"));
-        zipSplit("C:\\Users\\answer\\Desktop\\zip\\ai.zip", files);*/
-
-//        List<File> files = Lists.newArrayList(new File("C:\\Users\\answer\\Desktop\\zip\\report"), new File("C:\\Users\\answer\\Desktop\\zip\\report\\balance\\123.xlsx"));
-//        zip("C:\\Users\\answer\\Desktop\\zip\\ai.zip", files);
-
-        /*String srcPath = "C:\\Users\\answer\\Desktop\\zip\\123.zip";
-        String descPath = "C:\\Users\\answer\\Desktop\\zip";
-        unzip(srcPath, descPath);*/
-    }
 }
