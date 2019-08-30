@@ -156,7 +156,7 @@ public class ZipUtils {
             parameters.setEncryptionMethod(EncryptionMethod.ZIP_STANDARD);
         }
 
-        // splitLength minimum: 65536
+        // splitLength minimum: 65536 bytes = 1024 bytes * 64 = 64K
         splitLength = splitLength < 65536 ? 65536 : splitLength;
         zipFile.createSplitZipFile(zipFiles, parameters, true, splitLength);
     }
