@@ -23,6 +23,8 @@ import java.util.List;
  *     zip 包压缩解压工具类
  * </p>
  *
+ * <b>zip4j: </b><url>https://github.com/srikanth-lingala/zip4j</url>
+ *
  * @author Answer.AI.L
  * @version 1.0
  * @date 2019-08-28
@@ -411,6 +413,7 @@ public class ZipUtils {
         List<FileHeader> fileHeaders = zipFile.getFileHeaders();
         for (FileHeader fileHeader : fileHeaders) {
             String fileName = fileHeader.getFileName();
+            // https://github.com/srikanth-lingala/zip4j#faq // Are unicode file names supported?
             // 解决中文文件名乱码问题
 //            String fileName = new String(fileHeader.getFileName().getBytes("CP437"), "gbk");
 //                log.info("fileName=[{}]", fileName);
