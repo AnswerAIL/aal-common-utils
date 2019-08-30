@@ -401,6 +401,9 @@ public class ZipUtils {
         }
 
         if (zipFile.isEncrypted()) {
+            if (isEmpty(password)) {
+                System.out.println("该压缩包设置了密码, 请输入密码");
+            }
             zipFile = new ZipFile(srcFile, password.toCharArray());
         }
 
