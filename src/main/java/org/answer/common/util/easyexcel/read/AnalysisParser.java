@@ -23,6 +23,10 @@ import static org.answer.common.util.AiUtils.toJsonFormat;
  *     <blockquote>
  *         目前只支持 类 T 中的变量类型都为 String 的解析
  *     </blockquote>
+ *
+ *     Github: https://github.com/alibaba/easyexcel
+ *
+ *     使用文档: https://alibaba-easyexcel.github.io/index.html
  * </p>
  *
  * @author Answer.AI.L
