@@ -11,7 +11,8 @@
     <properties>
         <commonsLang3Version>3.8.1</commonsLang3Version>
         <fastJsonVersion>1.2.56</fastJsonVersion>
-        <easyExcelVersion>1.1.1</easyExcelVersion>
+        <!--<easyExcelVersion>2.1.0-beta4</easyExcelVersion>-->
+        <easyExcelVersion>2.0.5</easyExcelVersion>
         <lombokVersion>1.18.6</lombokVersion>
         <guavaVersion>27.0.1-jre</guavaVersion>
         <jacksonVersion>2.9.9.3</jacksonVersion>
@@ -84,6 +85,13 @@
             <version>2.0.15</version>
         </dependency>
         -->
+
+        <!-- tar 压缩包 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+            <version>1.18</version>
+        </dependency>
 
     </dependencies>
 
