@@ -7,8 +7,11 @@ import com.alibaba.excel.read.metadata.ReadSheet;
 import com.alibaba.excel.write.builder.ExcelWriterBuilder;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -153,4 +156,17 @@ public class ExcelApp {
         }
         return list;
     }
+
+
+    private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+    /**
+     * 导出 Excel 功能
+     */
+    /*public void exportExcel(HttpServletResponse response) throws Exception {
+        response.setContentType("application/vnd.ms-excel");
+        response.setCharacterEncoding("UTF-8");
+        String fileName = LocalDateTime.now().format(DATETIME_FORMATTER);
+        response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
+        EasyExcel.write(response.getOutputStream(), AssetData.class).sheet(0, "资产数据").doWrite(Lists.newArrayList(data(0)));
+    }*/
 }
