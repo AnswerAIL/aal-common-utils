@@ -57,7 +57,7 @@ public class Configuration {
         configurations.put("朝向", new Configuration("sub1001", "朝向", "string", "", "", ""));
         configurations.put("案例1-交易日期", new Configuration("sub1002", "案例1-交易日期", "string", "", "", ""));
         configurations.put("案例1-交易价格", new Configuration("sub1003", "案例1-交易价格", "long", "-1", "", ""));
-        configurations.put("案例2-交易日期", new Configuration("sub1004", "案例2-交易日期", "string", "", "", ""));
+        configurations.put("案例2-交易日期", new Configuration("sub1003", "案例2-交易日期", "string", "", "", ""));
         configurations.put("案例2-交易价格", new Configuration("sub1004", "案例2-交易价格", "long", "-1", "", ""));
 
         configurations.put("物业类型", new Configuration("sub2001", "物业类型", "string", "", "", ""));
