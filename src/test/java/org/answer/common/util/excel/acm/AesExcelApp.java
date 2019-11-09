@@ -13,14 +13,12 @@ import com.alibaba.excel.read.metadata.ReadSheet;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
 import org.answer.common.util.excel.acm.entity.DataTypeEnum;
 import org.answer.common.util.excel.acm.entity.Result;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -32,6 +30,7 @@ import java.util.Map;
  * @date 2019-11-09
  */
 @Slf4j
+@SuppressWarnings("unchecked")
 public class AesExcelApp {
     // 构成唯一值的 列名集合
     private static final List<String> UNIQUE_KEYS = Lists.newArrayList("押品编号", "押品分类");
@@ -43,6 +42,8 @@ public class AesExcelApp {
     // 32,768
     private static final int BASE_INDEX = 15;
     private static final int BASE_NUMBER = 1 << BASE_INDEX;
+    // 是否需要支持数组
+    private static final boolean SUPPORT_ARRAY = false;
 
     public static void main(String[] args) {
         String fileName = "src/test/resources/demo.xls";
@@ -125,6 +126,8 @@ public class AesExcelApp {
         for (Map<String, String> row : mainSheet) {
             rltRow = new HashMap<>(row.size());
 
+            Set<String> arrKeys = Sets.newHashSet();
+
             for (String key : row.keySet()) {
                 String value = row.get(key);
                 if (configs.containsKey(key)) {
@@ -145,9 +148,31 @@ public class AesExcelApp {
                     // 转换类型
                     DataTypeEnum dataType = DataTypeEnum.matcher(config.getDataType());
                     Object newValue = dataType.parse(value, config.getDefaultKey());
-                    rltRow.put(config.getKey(), newValue);
+
+                    String enKey = config.getKey();
+                    String arrKey = config.getArray();
+                    // 处理数组部分, 前提: 支持数组的情况下
+                    if (SUPPORT_ARRAY && arrKey != null && !"".equalsIgnoreCase(arrKey)) {
+                        arrKeys.add(arrKey);
+                        int arrIdx = config.getIndex();
+                        // 数据元素 {idx: {key: value, ...}}
+                        HashMap<Integer, Object> arrayEle = (HashMap) rltRow.getOrDefault(arrKey, Maps.newHashMap());
+                        // {key: value, ...}
+                        HashMap<String, Object> ele = (HashMap) arrayEle.getOrDefault(arrIdx, Maps.newHashMap());
+                        ele.put(enKey, newValue);
+                        arrayEle.put(arrIdx, ele);
+                        rltRow.put(arrKey, arrayEle);
+                    } else {
+                        rltRow.put(enKey, newValue);
+                    }
                 } else {
                     log.error("key={}不在配置表中", key);
+                }
+            }
+            if (SUPPORT_ARRAY && arrKeys.size() > 0) {
+                for (String ak : arrKeys) {
+                    Map<String, Map<String, Object>> tmpMap = (Map<String, Map<String, Object>>) rltRow.get(ak);
+                    rltRow.put(ak, tmpMap.values());
                 }
             }
             rltRows.add(rltRow);

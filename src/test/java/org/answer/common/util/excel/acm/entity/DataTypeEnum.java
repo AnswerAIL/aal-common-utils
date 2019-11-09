@@ -69,13 +69,6 @@ public enum DataTypeEnum implements IDataType {
         }
     },
 
-    ARRAY("array") {
-        @Override
-        public String[] parse(String value, String defaultValue) {
-            return new String[] {Objects.toString(value, defaultValue)};
-        }
-    },
-
     ;
 
 
