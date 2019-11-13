@@ -66,10 +66,10 @@ public class Configuration {
         configurations.put("是否破产", new Configuration("main009", "是否破产", "int", "-1", "", "goBroke"));
 
         configurations.put("朝向", new Configuration("sub1001", "朝向", "string", "", "", ""));
-        configurations.put("案例1-交易日期", new Configuration("sub1002", "案例1-交易日期", "string", "", "", "", "sub1Arr", 0));
-        configurations.put("案例1-交易价格", new Configuration("sub1003", "案例1-交易价格", "long", "-1", "", "", "sub1Arr", 0));
-        configurations.put("案例2-交易日期", new Configuration("sub1004", "案例2-交易日期", "string", "", "", "", "sub1Arr", 1));
-        configurations.put("案例2-交易价格", new Configuration("sub1005", "案例2-交易价格", "long", "-1", "", "", "sub1Arr", 1));
+        configurations.put("案例1-交易日期", new Configuration("sub1002", "案例1-交易日期", "date", "yyyy-MM-dd HH:mm:ss", "", "", "sub1Arr", 0));
+        configurations.put("案例1-交易价格", new Configuration("sub1003", "案例1-交易价格", "decimal2", "-1", "", "", "sub1Arr", 0));
+        configurations.put("案例2-交易日期", new Configuration("sub1004", "案例2-交易日期", "date", "yyyy-MM-dd HH:mm:ss", "", "", "sub1Arr", 1));
+        configurations.put("案例2-交易价格", new Configuration("sub1005", "案例2-交易价格", "decimal2", "-1", "", "", "sub1Arr", 1));
 
         configurations.put("物业类型", new Configuration("sub2001", "物业类型", "string", "", "", ""));
         configurations.put("案例1-商业繁荣度", new Configuration("sub2002", "案例1-商业繁荣度", "int", "2", "", "busiProsperity", "sub2Arr", 0));

@@ -9,6 +9,10 @@ package org.answer.common.util.excel.acm.entity;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
@@ -51,13 +55,13 @@ public enum DataTypeEnum implements IDataType {
         }
     },
 
-    FLOAT("float") {
+    DECIMAL2("decimal2") {
         @Override
-        public Float parse(String value, String defaultValue) {
+        public BigDecimal parse(String value, String defaultValue) {
             try {
-                return Float.parseFloat(value);
+                return trans2Number(value, 2);
             } catch (NumberFormatException e) {
-                return Float.valueOf(defaultValue);
+                return trans2Number(defaultValue, 2);
             }
         }
     },
@@ -69,7 +73,34 @@ public enum DataTypeEnum implements IDataType {
         }
     },
 
+    DATE("date") {
+        @Override
+        public String parse(String value, String srcFmt) {
+            try {
+                return LocalDate.parse(value, DateTimeFormatter.ofPattern(srcFmt)).format(DATE_FMT);
+            } catch (Exception e) {
+                log.debug("srcFmt=[{}], 日期=[{}]转换fmt=[{}]错误", srcFmt, value, DATE_FMT);
+                return value;
+            }
+        }
+    },
+
+    DATETIME("datetime") {
+        @Override
+        public String parse(String value, String srcFmt) {
+            try {
+                return LocalDateTime.parse(value, DateTimeFormatter.ofPattern(srcFmt)).format(DATETIME_FMT);
+            } catch (Exception e) {
+                log.debug("srcFmt=[{}], 日期=[{}]转换fmt=[{}]错误", srcFmt, value, DATETIME_FMT);
+                return value;
+            }
+        }
+    }
+
     ;
+
+    private static final DateTimeFormatter DATE_FMT = DateTimeFormatter.ofPattern("yyyy年MM月dd日");
+    private static final DateTimeFormatter DATETIME_FMT = DateTimeFormatter.ofPattern("yyyy年MM月dd日 HH时mm分ss秒");
 
 
     private String value;
@@ -97,5 +128,9 @@ public enum DataTypeEnum implements IDataType {
             log.debug("转换后value={}", value);
         }
         return value;
+    }
+
+    static BigDecimal trans2Number(String value, int scale) {
+        return new BigDecimal(value).setScale(scale, BigDecimal.ROUND_HALF_UP);
     }
 }

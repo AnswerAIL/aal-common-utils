@@ -16,6 +16,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
 import org.answer.common.util.excel.acm.entity.DataTypeEnum;
+import org.answer.common.util.excel.acm.entity.IDataType;
 import org.answer.common.util.excel.acm.entity.Result;
 
 import java.util.*;
@@ -38,7 +39,7 @@ public class AesExcelApp {
 
     // 索引哈希集<唯一值, 索引>
     private static final Map<String, Integer> INDEX_MAP = Maps.newHashMap();
-    private static final Map<String, DataTypeEnum> DATA_TYPE_ENUM_MAP = new HashMap<>(DataTypeEnum.values().length);
+    private static final Map<String, IDataType> DATA_TYPE_ENUM_MAP = new HashMap<>(DataTypeEnum.values().length);
     static {
         for (DataTypeEnum element : DataTypeEnum.values()) {
             DATA_TYPE_ENUM_MAP.put(element.value(), element);
@@ -152,7 +153,7 @@ public class AesExcelApp {
                     }
 
                     // 转换类型
-                    DataTypeEnum dataType = DATA_TYPE_ENUM_MAP.getOrDefault(config.getDataType(), DataTypeEnum.STRING);
+                    IDataType dataType = DATA_TYPE_ENUM_MAP.getOrDefault(config.getDataType(), DataTypeEnum.STRING);
                     Object newValue = dataType.parse(value, config.getDefaultKey());
 
                     String enKey = config.getKey();
