@@ -78,18 +78,13 @@ public enum DataTypeEnum implements IDataType {
         this.value = value;
     }
 
+    public String value() {
+        return value;
+    }
+
     @Override
     public Object parse(String value, String defaultValue) {
         throw new IllegalArgumentException("");
-    }
-
-    public static DataTypeEnum matcher(String ele) {
-        for (DataTypeEnum dataTypeEnum : DataTypeEnum.values()) {
-            if (dataTypeEnum.value.equalsIgnoreCase(ele)) {
-                return dataTypeEnum;
-            }
-        }
-        return DataTypeEnum.STRING;
     }
 
 

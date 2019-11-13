@@ -38,6 +38,12 @@ public class AesExcelApp {
 
     // 索引哈希集<唯一值, 索引>
     private static final Map<String, Integer> INDEX_MAP = Maps.newHashMap();
+    private static final Map<String, DataTypeEnum> DATA_TYPE_ENUM_MAP = new HashMap<>(DataTypeEnum.values().length);
+    static {
+        for (DataTypeEnum element : DataTypeEnum.values()) {
+            DATA_TYPE_ENUM_MAP.put(element.value(), element);
+        }
+    }
 
     // 32,768
     private static final int BASE_INDEX = 15;
@@ -146,7 +152,7 @@ public class AesExcelApp {
                     }
 
                     // 转换类型
-                    DataTypeEnum dataType = DataTypeEnum.matcher(config.getDataType());
+                    DataTypeEnum dataType = DATA_TYPE_ENUM_MAP.getOrDefault(config.getDataType(), DataTypeEnum.STRING);
                     Object newValue = dataType.parse(value, config.getDefaultKey());
 
                     String enKey = config.getKey();
