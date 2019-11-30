@@ -163,8 +163,17 @@ public class ExcelApp {
     /*public void exportExcel(HttpServletResponse response) throws Exception {
         response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("UTF-8");
-        String fileName = LocalDateTime.now().format(DATETIME_FORMATTER);
+        String sheetName = "导出列表";
+
+        String fileName = sheetName + UNDERLINE + LocalDateTime.now().format(DATETIME_FORMATTER);
+        // 火狐浏览器要区别设置， 转成 ISO-8859-1 编码
+        if (request.getHeader("user-agent").toLowerCase().contains("firefox")) {
+            fileName = new String(fileName.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
+        } else {
+            fileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8.name());
+        }
         response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
+
         EasyExcel.write(response.getOutputStream(), AssetData.class).sheet(0, "资产数据").doWrite(Lists.newArrayList(data(0)));
     }*/
 }
