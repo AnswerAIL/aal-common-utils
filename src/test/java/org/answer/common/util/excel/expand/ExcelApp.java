@@ -70,6 +70,8 @@ public class ExcelApp {
         AesAnalysisEventListener aesAnalysisEventListener = new AesAnalysisEventListener();
         // headRowNumber=0 没有表头, 默认为1, 即第一行为表头
         ExcelReader excelReader = EasyExcel.read(fileName, User.class, aesAnalysisEventListener).headRowNumber(0).build();
+        // 全局转换器设置, 所有java为string,excel为string的都会用 MyStringConverter 这个转换器
+//        EasyExcel.read(fileName, User.class, aesAnalysisEventListener).registerConverter(new MyStringConverter()).build();
 
         // 获取 sheet 列表
         for (ReadSheet readSheet : excelReader.excelExecutor().sheetList()) {

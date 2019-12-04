@@ -24,6 +24,7 @@ import java.util.Date;
 @ColumnWidth(25)
 public class AssetData {
 
+    // 不确定表头的转换器: EasyExcel.read(fileName, User.class, aesAnalysisEventListener).registerConverter(new MyStringConverter()).build();
     @ExcelProperty(value = {"主标题", "二级主标题", "姓名"}, converter = MyStringConverter.class)
     private String userName;
 
