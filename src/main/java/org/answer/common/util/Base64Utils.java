@@ -17,7 +17,7 @@ import java.util.Base64;
 
 /**
  * <p>
- *     Base64 工具
+ *     Base64 和文件互转工具类
  * </p>
  *
  * https://www.runoob.com/java/java8-base64.html
@@ -31,9 +31,9 @@ public class Base64Utils {
     }
 
     /**
-     * 图片转 Base64 编码
+     * 文件转 Base64 编码
      *
-     * @param srcFile 待编码图片
+     * @param srcFile 待编码文件
      * @return result
      */
     public static String encoder(File srcFile) {
@@ -42,15 +42,15 @@ public class Base64Utils {
     }
 
     /**
-     * 还原 base64 解码为图片
+     * 还原 base64 解码为文件
      *
-     * @param text 待解码 Base64 字符串
-     * @param descFile 解码的图片路径
+     * @param base64Code 待解码 Base64 字符串
+     * @param descFile 解码的文件路径
      */
-    public static void decoder(String text, File descFile) {
+    public static void decoder(String base64Code, File descFile) {
         BASE64Decoder decoder = new BASE64Decoder();
         try {
-            byte[] bytes = decoder.decodeBuffer(text);
+            byte[] bytes = decoder.decodeBuffer(base64Code);
             bytes2File(bytes, descFile);
         } catch (IOException e) {
             e.printStackTrace();
@@ -72,18 +72,18 @@ public class Base64Utils {
     }
 
 
-    public static void j8Decoder(String text, File descFile) {
-        byte[] bytes = Base64.getDecoder().decode(text);
+    public static void j8Decoder(String base64Code, File descFile) {
+        byte[] bytes = Base64.getDecoder().decode(base64Code);
         bytes2File(bytes, descFile);
     }
 
-    public static void j8MimeDecoder(String text, File descFile) {
-        byte[] bytes = Base64.getMimeDecoder().decode(text);
+    public static void j8MimeDecoder(String base64Code, File descFile) {
+        byte[] bytes = Base64.getMimeDecoder().decode(base64Code);
         bytes2File(bytes, descFile);
     }
 
-    public static void j8UrlDecoder(String text, File descFile) {
-        byte[] bytes = Base64.getUrlDecoder().decode(text);
+    public static void j8UrlDecoder(String base64Code, File descFile) {
+        byte[] bytes = Base64.getUrlDecoder().decode(base64Code);
         bytes2File(bytes, descFile);
     }
 
