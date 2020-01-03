@@ -188,6 +188,29 @@ public class ImageUtils {
     }
 
 
+    /**
+     * 截图(待优化)
+     *
+     * @param srcFile  原图片
+     * @throws Exception .
+     */
+    private static void screenshot(File srcFile) throws Exception {
+        BufferedImage srcImg = ImageIO.read(srcFile);
+        // 新图片的高度和宽度
+        int width = srcImg.getWidth() / 5, height = srcImg.getHeight() / 10;
+
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_BGR);
+        Graphics graphics = image.createGraphics();
+        // 设置填充颜色
+        graphics.setColor(srcImg.getGraphics().getColor());
+        // 填充区域
+        graphics.fillRect( 0, 0, width, height);
+        // 画图
+        graphics.drawImage(srcImg, 90, 35, srcImg.getWidth(), srcImg.getHeight(), null);
+        graphics.setPaintMode();
+        graphics.dispose();
+        ImageIO.write(image, "jpg", srcFile);
+    }
 
 
     public static void main(String[] args) {
@@ -217,6 +240,7 @@ public class ImageUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }*/
+
     }
 }
 
