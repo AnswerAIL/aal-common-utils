@@ -9,6 +9,9 @@ import com.alibaba.excel.write.metadata.WriteSheet;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -177,5 +180,22 @@ public class ExcelApp {
         response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
 
         EasyExcel.write(response.getOutputStream(), AssetData.class).sheet(0, "资产数据").doWrite(Lists.newArrayList(data(0)));
+    }*/
+
+
+    // 使用 request.getParameter("XXX"); 获取过滤参数值
+    /*public static void exportExcel(HttpServletRequest request, HttpServletResponse response, String sheetName, Class head, List data)
+            throws Exception {
+        String userAgent = "user-agent", ff = "firefox";
+        String fileName = sheetName + UNDERLINE + LocalDateTime.now().format(DATETIME_FORMATTER);
+        if (request.getHeader(userAgent).toLowerCase().contains(ff)) {
+            fileName = new String(fileName.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
+        } else {
+            fileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8.name());
+        }
+        response.setContentType("application/vnd.ms-excel");
+        response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+        response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
+        EasyExcel.write(response.getOutputStream(), head).sheet(0, sheetName).doWrite(data);
     }*/
 }
