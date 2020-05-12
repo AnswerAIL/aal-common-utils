@@ -21,6 +21,34 @@
         <commonsIOVersion>2.4</commonsIOVersion>
     </properties>
 
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <!--<scm>
+        <connection>scm:git:git@git.oschina.net:oufu/ofcms.git</connection>
+        <developerConnection>scm:git:git@git.oschina.net:oufu/ofcms.git</developerConnection>
+        <url>git@git.oschina.net:oufu/ofcms.git</url>
+    </scm>-->
+
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>sonatype-nexus-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>sonatype-nexus-staging</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+
+
     <dependencies>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -104,6 +132,20 @@
             <groupId>com.google.zxing</groupId>
             <artifactId>javase</artifactId>
             <version>3.4.0</version>
+        </dependency>
+
+
+        <!-- icepdf方式pdf转图片 -->
+        <dependency>
+            <groupId>org.icepdf.os</groupId>
+            <artifactId>icepdf-core</artifactId>
+            <version>6.1.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.media</groupId>
+                    <artifactId>jai-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>

@@ -13,12 +13,20 @@ import org.apache.pdfbox.rendering.PDFRenderer;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+
+import org.icepdf.core.exceptions.PDFException;
+import org.icepdf.core.exceptions.PDFSecurityException;
+import org.icepdf.core.pobjects.Document;
+import org.icepdf.core.pobjects.Page;
+import org.icepdf.core.util.GraphicsRenderingHints;
 
 
 /**
@@ -167,6 +175,44 @@ public class PdfUtils {
         }
     }
 
+
+
+
+    /**
+     * icepdf 方式pdf转图片
+     *
+     * @param pdfPath pdf文件路径
+     * @param path    最终生成图片存储路径
+     * @throws IOException
+     * @throws PDFException
+     * @throws PDFSecurityException
+     */
+    public static void pdf2Img(String pdfPath, String path)
+            throws IOException, PDFException, PDFSecurityException {
+        Document document = new Document();
+        document.setFile(pdfPath);
+        // 缩放比例
+        float scale = 3f;
+        // 旋转角度
+        float rotation = 0f;
+
+        for (int i = 0; i < document.getNumberOfPages(); i++) {
+            BufferedImage image = (BufferedImage)
+                    document.getPageImage(i, GraphicsRenderingHints.SCREEN, Page.BOUNDARY_BLEEDBOX, rotation, scale);
+            RenderedImage rendImage = image;
+            try {
+                String imgName = i + ".png";
+                System.out.println(imgName);
+                File file = new File(path + imgName);
+                ImageIO.write(rendImage, "png", file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            image.flush();
+        }
+        document.dispose();
+    }
+
     public static void main(String[] args) {
         String filePath = "C:\\Users\\answer\\Desktop\\pdf\\src\\answer.pdf";
         String descPath = "C:\\Users\\answer\\Desktop\\pdf\\desc\\answer.jpg";
@@ -177,5 +223,9 @@ public class PdfUtils {
         descPath = "C:\\Users\\answer\\Desktop\\pdf\\desc";
 //        List<String> imageList = pdf2Images(filePath, descPath);
 //        imageList.forEach(System.out::println);
+
+
+
+//        pdf2Img(filePath, descPath);
     }
 }
