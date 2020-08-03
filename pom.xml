@@ -4,14 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.answer</groupId>
-    <artifactId>ai-common-util</artifactId>
-    <version>0.0.1</version>
+    <groupId>com.github.answerail</groupId>
+    <artifactId>commons-utils</artifactId>
+    <version>1.0.0-RELEASE</version>
+    <packaging>jar</packaging>
+
+    <name>commons-utils</name>
+    <description>commons-utils</description>
+    <url>https://github.com/AnswerAIL/commons-utils</url>
 
     <properties>
         <commonsLang3Version>3.8.1</commonsLang3Version>
         <fastJsonVersion>1.2.56</fastJsonVersion>
-        <!--<easyExcelVersion>2.1.0-beta4</easyExcelVersion>-->
         <easyExcelVersion>2.0.5</easyExcelVersion>
         <lombokVersion>1.18.6</lombokVersion>
         <guavaVersion>27.0.1-jre</guavaVersion>
@@ -19,35 +23,9 @@
         <zip4jVersion>2.1.2</zip4jVersion>
         <lombkkVersion>1.18.6</lombkkVersion>
         <commonsIOVersion>2.4</commonsIOVersion>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
-
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-    <!--<scm>
-        <connection>scm:git:git@git.oschina.net:oufu/ofcms.git</connection>
-        <developerConnection>scm:git:git@git.oschina.net:oufu/ofcms.git</developerConnection>
-        <url>git@git.oschina.net:oufu/ofcms.git</url>
-    </scm>-->
-
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>sonatype-nexus-snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-        </snapshotRepository>
-        <repository>
-            <id>sonatype-nexus-staging</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
-
-
 
     <dependencies>
         <dependency>
@@ -106,13 +84,6 @@
             <artifactId>pdfbox</artifactId>
             <version>2.0.15</version>
         </dependency>
-        <!--
-        <dependency>
-            <groupId>org.apache.pdfbox</groupId>
-            <artifactId>fontbox</artifactId>
-            <version>2.0.15</version>
-        </dependency>
-        -->
 
         <!-- tar 压缩包 -->
         <dependency>
@@ -149,5 +120,136 @@
         </dependency>
 
     </dependencies>
+
+
+
+    <!-- 许可证信息 -->
+    <licenses>
+        <!-- Apache许可证 -->
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>jaemon</name>
+            <email>answer_ljm@163.com</email>
+            <organization>Answer.AI.L</organization>
+            <organizationUrl>https://github.com/AnswerAIL/commons-utils</organizationUrl>
+            <url>https://github.com/AnswerAIL/commons-utils</url>
+        </developer>
+    </developers>
+
+
+    <!-- SCM信息 -->
+    <scm>
+        <connection>scm:git:git://github.com/AnswerAIL/commons-utils.git</connection>
+        <developerConnection>scm:git:ssh://github.com/AnswerAIL/commons-utils.git</developerConnection>
+        <url>https://github.com/AnswerAIL/commons-utils/tree/master</url>
+    </scm>
+
+
+    <!-- snapshotRepository 与 repository 中的 id 一定要与 setting.xml 中 server 的 id 保持一致！ -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <!-- 要生成Javadoc和Source jar文件，您必须配置javadoc和源Maven插件 -->
+            <!--配置生成Javadoc包-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.4</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <aggregate>true</aggregate>
+                    <charset>UTF-8</charset>
+                    <docencoding>UTF-8</docencoding>
+                    <failOnError>false</failOnError>
+                    <defaultAuthor>Jaemon</defaultAuthor>
+                    <defaultSince>release</defaultSince>
+                    <defaultVersion>1.0.0</defaultVersion>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--配置生成源码包-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 打包时添加第三方依赖jar包 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 进行验签 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
 
 </project>
