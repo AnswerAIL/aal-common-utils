@@ -19,7 +19,7 @@
         <easyExcelVersion>2.0.5</easyExcelVersion>
         <lombokVersion>1.18.6</lombokVersion>
         <guavaVersion>27.0.1-jre</guavaVersion>
-        <jacksonVersion>2.9.9.3</jacksonVersion>
+        <jacksonVersion>2.9.10.7</jacksonVersion>
         <zip4jVersion>2.1.2</zip4jVersion>
         <lombkkVersion>1.18.6</lombkkVersion>
         <commonsIOVersion>2.4</commonsIOVersion>
