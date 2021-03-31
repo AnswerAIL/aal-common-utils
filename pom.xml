@@ -18,7 +18,7 @@
         <fastJsonVersion>1.2.56</fastJsonVersion>
         <easyExcelVersion>2.0.5</easyExcelVersion>
         <lombokVersion>1.18.6</lombokVersion>
-        <guavaVersion>27.0.1-jre</guavaVersion>
+        <guavaVersion>29.0-jre</guavaVersion>
         <jacksonVersion>2.9.9.3</jacksonVersion>
         <zip4jVersion>2.1.2</zip4jVersion>
         <lombkkVersion>1.18.6</lombkkVersion>
