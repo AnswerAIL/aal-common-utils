@@ -15,7 +15,7 @@
 
     <properties>
         <commonsLang3Version>3.8.1</commonsLang3Version>
-        <fastJsonVersion>1.2.56</fastJsonVersion>
+        <fastJsonVersion>1.2.83</fastJsonVersion>
         <easyExcelVersion>2.0.5</easyExcelVersion>
         <lombokVersion>1.18.6</lombokVersion>
         <guavaVersion>27.0.1-jre</guavaVersion>
